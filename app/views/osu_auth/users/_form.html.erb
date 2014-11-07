@@ -1,0 +1,14 @@
+<%= simple_form_for([:admin, @user]) do |f| %>
+  <%= render 'form_errors' %>
+
+  <%= f.input :first_name, label: 'First Name' %>
+  <%= f.input :last_name, label: 'Last Name' %>
+  <%= f.input :email, label: 'Email' %>
+  <%= f.input :name_n, label: 'Name.#' %>
+  <%= f.collection_check_boxes :roles, [['admin', 'Admin'] ,['super_admin', 'Super Admin']], :first, :last, item_wrapper_tag: 'div', item_wrapper_class: 'checkbox' %>
+
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', admin_users_path, class: 'btn btn-default' %>
+  </div>
+<% end %>
