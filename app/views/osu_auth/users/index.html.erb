@@ -18,10 +18,9 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= link_to user.display_name, user_path(user) %></td>
+        <td><%= user.display_name %></td>
         <td><%= user.name_n %></td>
         <td><%= user.email %></td>
-        <td><%= user.roles.join(', ') %></td>
         <td>
           <%= link_to 'Edit', edit_user_path(user) %> |
           <%= link_to 'Delete', user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
