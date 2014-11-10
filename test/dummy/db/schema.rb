@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141107150726) do
+ActiveRecord::Schema.define(version: 20141110181148) do
+
+  create_table "osu_auth_role_memberships", force: true do |t|
+    t.integer  "role_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "osu_auth_role_memberships", ["role_id"], name: "index_osu_auth_role_memberships_on_role_id"
+  add_index "osu_auth_role_memberships", ["user_id"], name: "index_osu_auth_role_memberships_on_user_id"
+
+  create_table "osu_auth_roles", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "osu_auth_users", force: true do |t|
     t.string   "name_n"
