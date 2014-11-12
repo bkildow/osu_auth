@@ -4,9 +4,9 @@
       <h2><%= pluralize(@role.errors.count, 'error') %> prohibited this role from being saved:</h2>
 
       <ul>
-      <% @role.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @role.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -15,6 +15,10 @@
     <%= f.label :name, 'Role Name', class: 'control-label' %>
     <%= f.text_field :name, class: 'form-control' %>
   </div>
+
+  <% @permissions.each do |perm| %>
+
+  <% end %>
 
   <div class="actions">
     <%= f.submit class: 'btn btn-primary' %>

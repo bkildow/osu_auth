@@ -11,5 +11,12 @@ module OsuAuth
         expect(OsuAuth::Permission.permissions).to eq({perm1: 'permission one', edit_user: 'can edit users'})
       end
     end
+
+    describe '.save_perms' do
+      pending 'implement this'
+    end
+
+
+
   end
 end
