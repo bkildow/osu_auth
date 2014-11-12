@@ -1,4 +1,10 @@
-<h1>Listing users</h1>
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active"><a href="#">Users</a></li>
+  <li role="presentation"><a href="<%= roles_path %>">Roles</a></li>
+</ul>
+
+
+<h1>Users</h1>
 
 <% if notice.present? %>
 <p class="alert alert-success"><%= notice %></p>
