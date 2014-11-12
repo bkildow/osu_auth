@@ -1,0 +1,10 @@
+Description:
+    Installs OSU Authentication and Authorization
+
+Example:
+    rails generate install
+
+    This will create:
+        initializers/osu_auth.rb
+
+    as well as run migrations needed.
