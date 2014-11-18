@@ -1,15 +1,13 @@
 module OsuAuth
-  class Permission < ActiveRecord::Base
+  class Permission < ActiveHash::Base
+
+    field :name
+    field :description
 
     def self.config
-      perms = {edit_user: 'can edit users'}
-      config = block_given? ? yield(perms) : {}
-      @permissions = perms.merge(config)
-    end
-
-    def self.permissions
-      config if @permissions.nil?
-      @permissions
+      perms = {name: :edit_user, description: 'can edit users'}
+      config = block_given? ? yield : []
+      self.data = config << perms
     end
 
   end
