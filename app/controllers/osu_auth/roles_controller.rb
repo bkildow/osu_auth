@@ -25,10 +25,10 @@ module OsuAuth
 
     # POST /roles
     def create
-      @role = Role.new(role_params)
+      @role = RoleForm.new(role_params)
 
       if @role.save
-        redirect_to @role, notice: 'Role was successfully created.'
+        redirect_to roles_path, notice: 'Role was successfully created.'
       else
         render :new
       end
@@ -57,7 +57,7 @@ module OsuAuth
 
       # Only allow a trusted parameter "white list" through.
       def role_params
-        params.require(:role).permit(:name)
+        params.require(:role_form).permit(:name)
       end
   end
 end

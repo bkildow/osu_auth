@@ -12,10 +12,12 @@ module OsuAuth
     end
 
     def self.permissions
+      config if @permissions.nil?
       @permissions
     end
 
     def self.save_perms(role_id, permissions = [])
+      # TODO: delete records for this role_id?
       permissions.each do |name|
         find_or_create_by!(machine_name: name, role_id: role_id) do |c|
           c.machine_name = name
