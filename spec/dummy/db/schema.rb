@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112144138) do
+ActiveRecord::Schema.define(version: 20141118160209) do
 
-  create_table "osu_auth_permissions", force: true do |t|
+  create_table "osu_auth_grants", force: true do |t|
     t.integer  "role_id"
-    t.string   "machine_name"
+    t.string   "permission"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
