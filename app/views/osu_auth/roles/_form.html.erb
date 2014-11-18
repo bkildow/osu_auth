@@ -17,15 +17,11 @@
   </div>
 
   <div class="form-group">
-    <%= @permissions.inspect %> <br/>
-    <%= @permissions.each do |k, v| %>
-      <%= "key: #{k}" %> <br/>
-      <%= "label: hello" %>
-    <% end %>
+    <%= f.collection_check_boxes(:permission_ids, OsuAuth::Permission.all, :name, :description) %>
   </div>
 
-  <!--<div class="actions">-->
-    <!--<%= f.submit class: 'btn btn-primary' %>-->
-    <!--<%= link_to 'Cancel', roles_path, class: 'btn btn-default' %>-->
-  <!--</div>-->
+  <div class="actions">
+    <%= f.submit class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', roles_path, class: 'btn btn-default' %>
+  </div>
 <% end %>

@@ -5,11 +5,12 @@ module OsuAuth
     field :name
     field :description
 
+    self.data = [{name: :edit_user, description: 'can edit users'}]
+
     def self.config
-      perms = [{name: :edit_user, description: 'can edit users'}]
       config = block_given? ? yield : []
       raise 'Permissions must be an array' unless config.respond_to? :<<
-      self.data = perms + config
+      self.data += config
     end
 
   end

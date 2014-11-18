@@ -16,7 +16,7 @@ module OsuAuth
     # GET /roles/new
     def new
       @role = Role.new
-      @permissions = Permission.permissions
+      @permissions = Permission.all
     end
 
     # GET /roles/1/edit

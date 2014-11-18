@@ -3,5 +3,9 @@ module OsuAuth
     has_many :users, through: :role_memberships
     has_many :grants
     accepts_nested_attributes_for :grants, allow_destroy: true
+
+    def permission_ids
+      grants.name
+    end
   end
 end
