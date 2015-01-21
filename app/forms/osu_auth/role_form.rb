@@ -6,7 +6,7 @@ module OsuAuth
     include ActiveModel::Model
 
     attribute :name, String
-    attribute :permissions, Hash, default: Permission.permissions
+    attribute :permission_ids, Array, default: []
 
     validates :name, presence: true
 
@@ -32,7 +32,15 @@ module OsuAuth
 
     def persist!
       @role = Role.create!(name: name)
-      # @user = @company.users.create!(name: name, email: email)
+
+      # Strip out empty strings
+      permissions = permission_ids.reject! { |c| c.empty? }
+
+      # Save a grant per permission
+      permissions.each do |p|
+        @grant = Grant.create!(role_id: @role.id, permission: p)
+      end
+
     end
   end
 end

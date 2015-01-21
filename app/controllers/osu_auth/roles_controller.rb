@@ -57,7 +57,7 @@ module OsuAuth
 
       # Only allow a trusted parameter "white list" through.
       def role_params
-        params.require(:role_form).permit(:name)
+        params.require(:role).permit(:name, permission_ids: [])
       end
   end
 end
