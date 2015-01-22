@@ -36,8 +36,10 @@ module OsuAuth
 
     # PATCH/PUT /roles/1
     def update
-      if @role.update(role_params)
-        redirect_to @role, notice: 'Role was successfully updated.'
+      @role = RoleForm.new(role_params)
+
+      if @role.save
+        redirect_to roles_path, notice: 'Role was successfully updated.'
       else
         render :edit
       end
@@ -57,7 +59,7 @@ module OsuAuth
 
       # Only allow a trusted parameter "white list" through.
       def role_params
-        params.require(:role).permit(:name, permission_ids: [])
+        params.require(:role).permit(:id, :name, permission_ids: [])
       end
   end
 end

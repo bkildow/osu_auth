@@ -5,7 +5,10 @@ module OsuAuth
     field :name
     field :description
 
-    self.data = [{name: :edit_user, description: 'can edit users'}]
+    self.data = [
+        {name: :edit_user, description: 'can edit users'},
+        {name: :delete_user, description: 'can delete users'}
+    ]
 
     def self.config
       config = block_given? ? yield : []

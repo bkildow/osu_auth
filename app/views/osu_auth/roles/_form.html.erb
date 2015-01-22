@@ -17,8 +17,13 @@
   </div>
 
   <div class="form-group">
-    <%= f.collection_check_boxes(:permission_ids, OsuAuth::Permission.all, :name, :description) %>
+    <%= f.collection_check_boxes(:permission_ids, OsuAuth::Permission.all, :name, :description) do |b| %>
+      <%=  b.check_box(@role.has_permission?(b.value) ? {checked: 'checked'} : {})  %>
+      <%=  b.label %>
+    <% end %>
   </div>
+
+  <%= f.hidden_field :id %>
 
   <div class="actions">
     <%= f.submit class: 'btn btn-primary' %>

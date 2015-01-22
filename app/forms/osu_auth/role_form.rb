@@ -7,6 +7,7 @@ module OsuAuth
 
     attribute :name, String
     attribute :permission_ids, Array, default: []
+    attribute :id, Integer
 
     validates :name, presence: true
 
@@ -15,9 +16,9 @@ module OsuAuth
       false
     end
 
-    def action
-      'create'
-    end
+    # def action
+    #   'create'
+    # end
 
     def save
       if valid?
@@ -31,10 +32,17 @@ module OsuAuth
     private
 
     def persist!
-      @role = Role.create!(name: name)
+      if id.blank?
+        @role = Role.create!(name: name)
+      else
+        @role = Role.find(id)
+        @role.update(name: name)
+        @grants = Grant.where(role_id: @role.id)
+        @grants.delete_all
+      end
 
       # Strip out empty strings
-      permissions = permission_ids.reject! { |c| c.empty? }
+      permissions = permission_ids.reject! { |c| c.empty? } || []
 
       # Save a grant per permission
       permissions.each do |p|
