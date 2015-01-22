@@ -1,7 +1,6 @@
 module OsuAuth
   class Grant < ActiveRecord::Base
-    belongs_to :role, inverse_of: :grants
-
+    belongs_to :role
     validates :role_id, :permission, presence: true
 
   end
