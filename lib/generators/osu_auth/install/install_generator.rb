@@ -7,7 +7,7 @@ module OsuAuth
       route "mount OsuAuth::Engine => '/admin'"
       rake 'osu_auth:install:migrations'
 
-      copy_file 'osu_auth.rb', "config/initializers/#{file_name}.rb"
+      copy_file 'osu_auth.rb', 'config/initializers/osu_auth.rb'
 
     end
   end
