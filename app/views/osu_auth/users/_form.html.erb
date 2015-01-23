@@ -23,7 +23,14 @@
   </div>
 
   <div class="form-group">
-    <%= f.collection_check_boxes(:role_ids, OsuAuth::Role.all, :id, :name) %>
+    <%= f.collection_check_boxes(:role_ids, OsuAuth::Role.all, :id, :name) do |b| %>
+      <div class="checkbox">
+        <label>
+          <%= b.check_box %>
+          <%= b.text %>
+        </label>
+      </div>
+    <% end %>
   </div>
 
   <div class="actions">

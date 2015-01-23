@@ -18,8 +18,12 @@
 
   <div class="form-group">
     <%= f.collection_check_boxes(:permission_ids, OsuAuth::Permission.all, :name, :description) do |b| %>
-      <%=  b.check_box(@role.has_permission?(b.value) ? {checked: 'checked'} : {})  %>
-      <%=  b.label %>
+      <div class="checkbox">
+        <label>
+          <%= b.check_box(@role.has_permission?(b.value) ? {checked: 'checked'} : {}) %>
+          <%= b.text %>
+        </label>
+      </div>
     <% end %>
   </div>
 
