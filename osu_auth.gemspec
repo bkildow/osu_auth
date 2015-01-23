@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jquery-rails', '~> 3.1'
   s.add_dependency 'virtus', '~> 1.0'
   s.add_dependency 'active_hash', '~> 1.4'
+  s.add_dependency 'pundit', '~> 0.3'
 
   s.add_development_dependency 'sqlite3'
 end
