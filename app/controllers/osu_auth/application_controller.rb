@@ -1,4 +1,2 @@
-module OsuAuth
-  class ApplicationController < ApplicationController
-  end
+class OsuAuth::ApplicationController < ApplicationController
 end
