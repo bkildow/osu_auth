@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :osu_auth_grant, :class => 'OsuAuth::Grant' do
-    role_id 1
+    association :role, factory: :osu_auth_role
     permission 'edit_user'
   end
 end
