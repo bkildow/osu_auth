@@ -7,7 +7,7 @@ authentication mechanisms with shibboleth.
 
 To install, run the provided generator:
 
-`bundle exec rake osu_auth:install`
+`bundle exec rails g osu_auth:install`
 
 then run the migrations:
 
