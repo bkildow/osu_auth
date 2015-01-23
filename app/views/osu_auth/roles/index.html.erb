@@ -5,6 +5,14 @@
 
 <h1>Roles</h1>
 
+<% if notice.present? %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<%= link_to new_role_path, class: 'btn btn-primary', role: 'button' do %>
+  <span class="glyphicon glyphicon-plus"></span> New Role
+<% end %>
+
 <table>
   <thead>
     <tr>
@@ -22,7 +30,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Role', new_role_path %>
