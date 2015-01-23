@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'rails', '~> 4.2'
-  s.add_dependency 'jquery-rails', '~> 3.1'
+  s.add_dependency 'jquery-rails', '~> 4.0'
   s.add_dependency 'virtus', '~> 1.0'
   s.add_dependency 'active_hash', '~> 1.4'
   s.add_dependency 'pundit', '~> 0.3'
