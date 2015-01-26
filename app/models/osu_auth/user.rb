@@ -28,5 +28,12 @@ module OsuAuth
       end
     end
 
+    # Finds or creates user
+    def self.omniauth(auth_hash:)
+      unscoped.where(emplid: auth_hash[:uid]).first_or_initialize.tap do |user|
+        user.update_attributes Hash[auth_hash[:info].select { |k, _| user.respond_to? "#{k}=" }]
+      end
+    end
+
   end
 end
