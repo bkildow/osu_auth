@@ -13,8 +13,15 @@ then run the migrations:
 
 `bundle exec rake db:migrate`
 
-This will install the tables needed as well as create an initializer here: config/initializers/osu_auth.rb.
-This is where you can specify your permissions.
+This will do the following:
+* set up the tables you need
+* create an initializer here: config/initializers/osu_auth.rb for defining permissions
+* create an omniauth initializer
+* mount the engine at /admin
+
+## Routes
+
+This will mount at /admin, and give you a path to users (/admin/users) and roles (/admin/roles).
 
 ## Permissions
 
