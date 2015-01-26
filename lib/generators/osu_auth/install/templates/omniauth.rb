@@ -6,7 +6,8 @@ Rails.application.config.middleware.use OmniAuth::Builder do
       info_fields: {
           name_n: lambda { |request_param| request_param.call('eppn').chomp('@osu.edu') },
           first_name: 'givenName',
-          last_name: 'sn'
+          last_name: 'sn',
+          emplid: 'osuid'
       },
       debug: false
   }
