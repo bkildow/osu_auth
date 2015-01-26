@@ -5,6 +5,7 @@ module OsuAuth
     def install
       # run 'bundle install'
       route "mount OsuAuth::Engine => '/admin'"
+      route "match '/auth/:provider/callback', to: 'session#create', via: %i[get post]"
       rake 'osu_auth:install:migrations'
 
       copy_file 'osu_auth.rb', 'config/initializers/osu_auth.rb'
