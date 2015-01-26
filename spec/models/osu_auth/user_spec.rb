@@ -21,44 +21,84 @@ module OsuAuth
     let(:editor_membership) { create(:osu_auth_role_membership, user: user, role: editor) }
     let(:viewer_membership) { create(:osu_auth_role_membership, user: user, role: viewer) }
 
-    before(:each) do
-      # set up role membership
-      [admin_membership, editor_membership, viewer_membership]
+    describe 'permission checking' do
 
-      # set up role permissions
-      [grant_admin_delete, grant_editor_edit, grant_viewer_view, grant_admin_view]
+      before(:each) do
+        # set up role membership
+        [admin_membership, editor_membership, viewer_membership]
+
+        # set up role permissions
+        [grant_admin_delete, grant_editor_edit, grant_viewer_view, grant_admin_view]
+      end
+
+      describe '.can?' do
+        it 'should be true for permissions assigned' do
+          expect(user.can? 'delete_user').to be_truthy
+          expect(user.can? 'view_user').to be_truthy
+          expect(user.can? 'edit_user').to be_truthy
+        end
+
+        it 'should be false for permissions not assigned' do
+          # Remove the admin role from user
+          admin_membership.destroy
+
+          expect(user.can? 'delete_user').to be_falsey
+          expect(user.can? 'view_user').to be_truthy
+        end
+
+        it 'should not fail if no roles are assigned' do
+          admin_membership.destroy
+          editor_membership.destroy
+          viewer_membership.destroy
+
+          expect(user.can? 'delete_user').to be_falsey
+          expect(user.can? 'view_user').to be_falsey
+          expect(user.can? 'edit_user').to be_falsey
+        end
+      end
+
+      describe '.permissions' do
+        it 'should return an array of permissions assigned through roles' do
+          expect(user.permissions).to eq(%w(delete_user view_user edit_user))
+        end
+      end
+
     end
 
-    describe '.can?' do
-      it 'should be true for permissions assigned' do
-        expect(user.can? 'delete_user').to be_truthy
-        expect(user.can? 'view_user').to be_truthy
-        expect(user.can? 'edit_user').to be_truthy
+    describe '.omniauth' do
+      it 'should create a user when one does not exist' do
+        auth_hash = {
+            uid: 1234,
+            info: {name_n: 'smith.1', first_name: 'Bob', last_name: 'Smith'}
+        }
+
+        auth_user = User.omniauth(auth_hash)
+
+        expect(auth_user.first_name).to eq('Bob')
       end
 
-      it 'should be false for permissions not assigned' do
-        # Remove the admin role from user
-        admin_membership.destroy
+      it 'should find a user by emplid if provided' do
 
-        expect(user.can? 'delete_user').to be_falsey
-        expect(user.can? 'view_user').to be_truthy
+        # build the user factory
+        last_name = user.last_name
+
+        auth_hash = {uid: 111111111, info: {first_name: 'Bob'}}
+        auth_user = User.omniauth(auth_hash)
+
+        expect(auth_user.last_name).to eq(last_name)
       end
 
-      it 'should not fail if no roles are assigned' do
-        admin_membership.destroy
-        editor_membership.destroy
-        viewer_membership.destroy
+      it 'should find a user by name_n if no emplid is provided' do
 
-        expect(user.can? 'delete_user').to be_falsey
-        expect(user.can? 'view_user').to be_falsey
-        expect(user.can? 'edit_user').to be_falsey
-      end
-    end
+        # build the user factory
+        last_name = user.last_name
 
-    describe '.permissions' do
-      it 'should return an array of permissions assigned through roles' do
-        expect(user.permissions).to eq(%w(delete_user view_user edit_user))
+        auth_hash = {uid: nil, info: {name_n: 'buckeye.1'}}
+        auth_user = User.omniauth(auth_hash)
+
+        expect(auth_user.last_name).to eq(last_name)
       end
+
     end
 
   end

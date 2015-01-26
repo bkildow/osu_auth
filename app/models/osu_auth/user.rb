@@ -28,21 +28,16 @@ module OsuAuth
       end
     end
 
-    # Finds or creates user
-    def self.find_or_create_from_auth_hash(auth_hash:)
-      where(emplid: auth_hash[:uid]).first_or_initialize.tap do |user|
-        user.update_attributes Hash[auth_hash[:info].select { |k, _| user.respond_to? "#{k}=" }]
-      end
-    end
+    def self.omniauth(auth_hash)
+      # Search by emplid id first, and if that doesn't exist see if name_n does
+      auth_user = find_by(emplid: auth_hash[:uid]) || find_by(name_n: auth_hash[:info][:name_n])
 
-    def self.omniauth(auth_hash:)
-      user = where(emplid: auth_hash[:uid])
-      if user.blank?
-        user = where(name_n: auth_hash[:info][:name_n])
-      end
-
-      user.first_or_initialize.tap do |user|
-        user.update_attributes Hash[auth_hash[:info].select { |k, _| user.respond_to? "#{k}=" }]
+      # Create a new record if one doesn't exist. Otherwise, update the existing record
+      if auth_user.blank? then
+        create(auth_hash[:info])
+      else
+        auth_user.update_attributes(auth_hash[:info])
+        auth_user
       end
     end
 
