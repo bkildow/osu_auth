@@ -29,8 +29,19 @@ module OsuAuth
     end
 
     # Finds or creates user
+    def self.find_or_create_from_auth_hash(auth_hash:)
+      where(emplid: auth_hash[:uid]).first_or_initialize.tap do |user|
+        user.update_attributes Hash[auth_hash[:info].select { |k, _| user.respond_to? "#{k}=" }]
+      end
+    end
+
     def self.omniauth(auth_hash:)
-      unscoped.where(emplid: auth_hash[:uid]).first_or_initialize.tap do |user|
+      user = where(emplid: auth_hash[:uid])
+      if user.blank?
+        user = where(name_n: auth_hash[:info][:name_n])
+      end
+
+      user.first_or_initialize.tap do |user|
         user.update_attributes Hash[auth_hash[:info].select { |k, _| user.respond_to? "#{k}=" }]
       end
     end

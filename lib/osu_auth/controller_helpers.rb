@@ -10,22 +10,19 @@ module OsuAuth
 
     protected
 
-    def current_user
-      @current_user ||= User.find_by(emplid: emplid)
-    end
-
     def authenticate_user!
-      unless current_user
-         if Rails.env.production?
-           redirect_to '/'
-         else
-           redirect_to '/'
-         end
+      if session['user_id'].blank?
+        # capture current page to redirect to later
+        session['request_path'] = request.path
+        redirect_to login_path
+      else
+        @current_user = User.find(session['user_id'])
       end
     end
 
-    def emplid
-      request.env['omniauth.auth'] && request.env['omniauth.auth']['uid']
+    def login_path
+      Rails.env.production? ? 'auth/shibboleth' : 'auth/developer'
     end
+
   end
 end
