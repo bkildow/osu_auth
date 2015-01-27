@@ -4,7 +4,7 @@ module OsuAuth
     skip_before_action :verify_authenticity_token unless Rails.env.production?
 
     def create
-      user = User.omniauth(auth_hash: auth_hash)
+      user = User.omniauth(auth_hash)
       session[:current_user] = user.to_gid
       redirect_to original_page
     end
