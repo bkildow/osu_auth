@@ -5,6 +5,7 @@ module OsuAuth
     has_many :role_memberships
 
     validates :first_name, :last_name, :email, :name_n, presence: true
+    validates :name_n, uniqueness: true
 
     attr_accessor :permissions
 
@@ -34,7 +35,8 @@ module OsuAuth
 
       # Create a new record if one doesn't exist. Otherwise, update the existing record
       if auth_user.blank? then
-        create(auth_hash[:info])
+        new(auth_hash[:info])
+        save
       else
         auth_user.update_attributes(auth_hash[:info])
         auth_user

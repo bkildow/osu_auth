@@ -6,7 +6,7 @@ module OsuAuth
     def create
       user = User.omniauth(auth_hash)
       session[:current_user] = user.to_gid
-      redirect_to original_page
+      redirect_to '/'
     end
 
     def destroy
@@ -14,10 +14,6 @@ module OsuAuth
     end
 
     protected
-
-    def original_page
-      session['request_path'] || '/'
-    end
 
     def auth_hash
       request.env['omniauth.auth']
