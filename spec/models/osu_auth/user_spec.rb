@@ -67,7 +67,7 @@ module OsuAuth
 
     describe '.omniauth' do
       it 'should create a user when one does not exist' do
-        auth_hash = {emplid: 1234, name_n: 'smith.1', first_name: 'Bob', last_name: 'Smith' }
+        auth_hash = {emplid: 1234, name_n: 'smith.1', first_name: 'Bob', last_name: 'Smith'}
         User.omniauth(auth_hash)
         expect(User.first.first_name).to eq('Bob')
       end
@@ -94,23 +94,20 @@ module OsuAuth
 
     end
 
-    describe '.find_by_emplid_or_name_n' do
+    describe '.find_by_emplid' do
       it 'should find a user by emplid' do
-        auth_user = User.find_by_emplid_or_name_n(emplid: user.emplid)
+        auth_user = User.find_by_emplid(emplid: user.emplid)
         expect(auth_user.first_name).to eq('Brutus')
       end
+    end
 
+    describe '.find_by_name_n' do
       it 'should find a user by name_n' do
-        auth_user = User.find_by_emplid_or_name_n(emplid: '', name_n: user.name_n)
+        auth_user = User.find_by_name_n(name_n: user.name_n)
         expect(auth_user.first_name).to eq('Brutus')
       end
-
-      it 'should return nil if nothing is found' do
-        auth_user = User.find_by_emplid_or_name_n(emplid: '', name_n: '')
-        expect(auth_user).to be_nil
-      end
-
     end
 
   end
+
 end
