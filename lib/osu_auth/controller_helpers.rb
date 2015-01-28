@@ -5,7 +5,7 @@ module OsuAuth
 
     included do
       helper_method :current_user
-      attr_accessor :current_user
+      attr_writer :current_user
     end
 
     private

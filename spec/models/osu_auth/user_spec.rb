@@ -67,36 +67,47 @@ module OsuAuth
 
     describe '.omniauth' do
       it 'should create a user when one does not exist' do
-        auth_hash = {
-            uid: 1234,
-            info: {name_n: 'smith.1', first_name: 'Bob', last_name: 'Smith'}
-        }
-
-        auth_user = User.omniauth(auth_hash)
-
-        expect(auth_user.first_name).to eq('Bob')
+        auth_hash = {emplid: 1234, name_n: 'smith.1', first_name: 'Bob', last_name: 'Smith' }
+        User.omniauth(auth_hash)
+        expect(User.first.first_name).to eq('Bob')
       end
 
-      it 'should find a user by emplid if provided' do
-
+      it 'should find a user by emplid and update it' do
         # build the user factory
         last_name = user.last_name
 
-        auth_hash = {uid: 111111111, info: {first_name: 'Bob'}}
+        auth_hash = {emplid: 111111111, first_name: 'Bob'}
         auth_user = User.omniauth(auth_hash)
 
         expect(auth_user.last_name).to eq(last_name)
       end
 
-      it 'should find a user by name_n if no emplid is provided' do
-
+      it 'should find a user by name_n and update it' do
         # build the user factory
         last_name = user.last_name
 
-        auth_hash = {uid: nil, info: {name_n: 'buckeye.1'}}
+        auth_hash = {name_n: 'buckeye.1'}
         auth_user = User.omniauth(auth_hash)
 
         expect(auth_user.last_name).to eq(last_name)
+      end
+
+    end
+
+    describe '.find_by_emplid_or_name_n' do
+      it 'should find a user by emplid' do
+        auth_user = User.find_by_emplid_or_name_n(emplid: user.emplid)
+        expect(auth_user.first_name).to eq('Brutus')
+      end
+
+      it 'should find a user by name_n' do
+        auth_user = User.find_by_emplid_or_name_n(emplid: '', name_n: user.name_n)
+        expect(auth_user.first_name).to eq('Brutus')
+      end
+
+      it 'should return nil if nothing is found' do
+        auth_user = User.find_by_emplid_or_name_n(emplid: '', name_n: '')
+        expect(auth_user).to be_nil
       end
 
     end

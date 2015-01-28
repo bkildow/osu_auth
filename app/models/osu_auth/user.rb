@@ -4,7 +4,7 @@ module OsuAuth
     has_many :roles, through: :role_memberships
     has_many :role_memberships
 
-    validates :first_name, :last_name, :email, :name_n, presence: true
+    validates :name_n, presence: true
     validates :name_n, uniqueness: true
 
     attr_accessor :permissions
@@ -30,17 +30,24 @@ module OsuAuth
     end
 
     def self.omniauth(auth_hash)
-      # Search by emplid id first, and if that doesn't exist see if name_n does
-      auth_user = find_by(emplid: auth_hash[:uid]) || find_by(name_n: auth_hash[:info][:name_n])
+      auth_user =  find_by_emplid_or_name_n(emplid: auth_hash[:emplid], name_n: auth_hash[:name_n])
 
-      # Create a new record if one doesn't exist. Otherwise, update the existing record
-      if auth_user.blank? then
-        new(auth_hash[:info])
-        save
-      else
-        auth_user.update_attributes(auth_hash[:info])
-        auth_user
-      end
+      # Create a new record if one doesn't exist
+      auth_user = new if auth_user.blank?
+
+      auth_user.attributes = auth_hash
+      auth_user.save
+
+      auth_user
+    end
+
+    # Finds users by emplid with fallback to name_n.
+    # Returns nil on no matching record or if both emplid and name_n are empty
+    # Doesn't match null fields
+    def self.find_by_emplid_or_name_n(emplid: '', name_n: '')
+      return find_by(emplid: emplid) if emplid.present?
+      return find_by(name_n: name_n) if name_n.present?
+      nil
     end
 
   end
