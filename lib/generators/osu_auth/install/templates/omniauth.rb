@@ -1,8 +1,8 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
 
   dev_options = {
-      :fields => [:name_n, :email],
-      :uid_field => :name_n
+      fields: [:name_n],
+      uid_field: :name_n
   }
 
   provider :developer, dev_options unless Rails.env.production?
