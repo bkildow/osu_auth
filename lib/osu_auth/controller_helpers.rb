@@ -6,6 +6,7 @@ module OsuAuth
     included do
       helper_method :current_user
       attr_writer :current_user
+      include Pundit
     end
 
     private

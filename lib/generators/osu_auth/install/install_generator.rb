@@ -11,6 +11,7 @@ module OsuAuth
       copy_file 'osu_auth.rb', 'config/initializers/osu_auth.rb'
       copy_file 'omniauth.rb', 'config/initializers/omniauth.rb'
       copy_file 'application_policy.rb', 'app/policies/application_policy.rb'
+      copy_file 'user_policy.rb', 'app/policies/user_policy.rb'
     end
   end
 end

@@ -4,10 +4,13 @@ module OsuAuth
   class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+    # Make sure all actions are authorized
+    after_action :verify_authorized
+
     # GET /admin/users
     def index
       @users = User.all
-      # authorize @users
+      authorize @users
     end
 
     # GET /admin/users/1
@@ -17,7 +20,6 @@ module OsuAuth
     # GET /admin/users/new
     def new
       @user = User.new
-      # authorize @user
     end
 
     # GET /admin/users/1/edit
@@ -61,7 +63,7 @@ module OsuAuth
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
-      # authorize @user
+      authorize @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
