@@ -32,15 +32,4 @@ class OsuAuth::UserPolicy < ApplicationPolicy
     @user.super_admin?
   end
 
-  # Exclude super admin users if user is not a super admin.
-  class Scope < Scope
-    def resolve
-      if @user.super_admin?
-        scope.all
-      else
-        scope.where(super_admin: false)
-      end
-    end
-  end
-
 end
