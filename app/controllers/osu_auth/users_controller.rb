@@ -20,6 +20,7 @@ module OsuAuth
     # GET /admin/users/new
     def new
       @user = User.new
+      authorize @user
     end
 
     # GET /admin/users/1/edit
@@ -29,7 +30,7 @@ module OsuAuth
     # user /users
     def create
       @user = User.new(user_params)
-      # authorize @user
+      authorize @user
 
       respond_to do |format|
         if @user.save

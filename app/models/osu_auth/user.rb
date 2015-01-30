@@ -2,7 +2,7 @@ module OsuAuth
   class User < ActiveRecord::Base
 
     has_many :roles, through: :role_memberships
-    has_many :role_memberships
+    has_many :role_memberships, dependent: :destroy
 
     validates :name_n, presence: true
     validates :name_n, uniqueness: true
@@ -15,7 +15,7 @@ module OsuAuth
 
     # Checks to see if the user has permission
     def can?(permission)
-      permissions.include? permission
+      permissions.include? permission.to_s
     end
 
     # Gets an array of all available permissions across roles assigned
