@@ -4,9 +4,13 @@ module OsuAuth
   class RolesController < ApplicationController
     before_action :set_role, only: [:show, :edit, :update, :destroy]
 
+    # Make sure all actions are authorized
+    after_action :verify_authorized
+
     # GET /roles
     def index
       @roles = Role.all
+      authorize @roles
     end
 
     # GET /roles/1
@@ -17,6 +21,7 @@ module OsuAuth
     def new
       @role = Role.new
       @permissions = Permission.all
+      authorize @role
     end
 
     # GET /roles/1/edit
@@ -26,6 +31,7 @@ module OsuAuth
     # POST /roles
     def create
       @role = RoleForm.new(role_params)
+      authorize @role
 
       if @role.save
         redirect_to roles_path, notice: 'Role was successfully created.'
@@ -55,6 +61,7 @@ module OsuAuth
       # Use callbacks to share common setup or constraints between actions.
       def set_role
         @role = Role.find(params[:id])
+        authorize @role
       end
 
       # Only allow a trusted parameter "white list" through.

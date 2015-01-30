@@ -9,9 +9,7 @@
   <p class="alert alert-success"><%= notice %></p>
 <% end %>
 
-<%= link_to new_role_path, class: 'btn btn-primary', role: 'button' do %>
-  <span class="glyphicon glyphicon-plus"></span> New Role
-<% end %>
+<%= create_role_link %>
 
 <table class="table table-hover">
   <thead>
@@ -26,8 +24,8 @@
       <tr>
         <td><%= role.name %></td>
         <td>
-          <%= link_to 'Edit', edit_role_path(role) %>  |
-          <%= link_to 'Delete', role_path(role), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= edit_role_link(role) %>
+          <%= delete_role_link(role) %>
         </td>
       </tr>
     <% end %>
