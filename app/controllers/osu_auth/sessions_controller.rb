@@ -12,6 +12,7 @@ module OsuAuth
 
     def destroy
       session[:current_user] = nil
+      redirect_to '/'
     end
 
     protected

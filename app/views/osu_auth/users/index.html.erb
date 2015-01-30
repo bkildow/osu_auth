@@ -30,6 +30,7 @@
         <td><%= user.name_n %></td>
         <td><%= user.email %></td>
         <td>
+          <%= masquerade_user_link(user) %>
           <%= edit_user_link(user) %>
           <%= delete_user_link(user) %>
         </td>

@@ -20,5 +20,12 @@ module OsuAuth
         link_to 'Delete', user_path(user), method: :delete, data: {confirm: 'Are you sure?'}
       end
     end
+
+    def masquerade_user_link(user)
+      if policy(user).masquerade?
+        link_to 'Login', masquerade_user_path(user)
+      end
+    end
+
   end
 end

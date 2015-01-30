@@ -28,4 +28,8 @@ class OsuAuth::UserPolicy < ApplicationPolicy
     @user.can?(:delete_user)
   end
 
+  def masquerade?
+    @user.super_admin?
+  end
+
 end
