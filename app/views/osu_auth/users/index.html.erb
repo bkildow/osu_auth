@@ -10,9 +10,8 @@
 <p class="alert alert-success"><%= notice %></p>
 <% end %>
 
-<%= link_to new_user_path, class: 'btn btn-primary', role: 'button' do %>
-  <span class="glyphicon glyphicon-plus"></span> New User
-<% end %>
+<%= create_user_link %>
+
 
 <table class="table table-hover">
   <thead>
@@ -31,8 +30,8 @@
         <td><%= user.name_n %></td>
         <td><%= user.email %></td>
         <td>
-          <%= link_to 'Edit', edit_user_path(user) %> |
-          <%= link_to 'Delete', user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= edit_user_link(user) %>
+          <%= delete_user_link(user) %>
         </td>
       </tr>
     <% end %>
