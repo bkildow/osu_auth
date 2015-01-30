@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118160209) do
+ActiveRecord::Schema.define(version: 20150130164819) do
 
   create_table "osu_auth_grants", force: :cascade do |t|
     t.integer  "role_id"
-    t.string   "permission"
+    t.string   "permission", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,19 +31,20 @@ ActiveRecord::Schema.define(version: 20141118160209) do
   add_index "osu_auth_role_memberships", ["user_id"], name: "index_osu_auth_role_memberships_on_user_id"
 
   create_table "osu_auth_roles", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "osu_auth_users", force: :cascade do |t|
-    t.string   "name_n"
-    t.string   "emplid"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
+    t.string   "name_n",      limit: 255
+    t.string   "emplid",      limit: 255
+    t.string   "first_name",  limit: 255
+    t.string   "last_name",   limit: 255
+    t.string   "email",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "super_admin",             default: false, null: false
   end
 
 end

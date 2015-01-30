@@ -9,7 +9,8 @@ module OsuAuth
 
     # GET /admin/users
     def index
-      @users = User.all
+      # Get all users excluding super admins
+      @users = User.where(super_admin: false)
       authorize @users
     end
 
