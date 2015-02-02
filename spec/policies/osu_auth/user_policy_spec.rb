@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe OsuAuth::UserPolicy  do
+describe OsuAuth::UserPolicy do
   subject { described_class }
 
   let(:user) { build(:osu_auth_user) }
@@ -11,9 +11,8 @@ describe OsuAuth::UserPolicy  do
       expect(subject).to permit(user, user)
     end
 
-    it 'denies access if user does not have view_users' do
-      expect(subject).not_to permit(user, user)
-    end
+    it { is_expected.not_to permit(user, user) }
+
   end
 
   permissions :show? do
@@ -22,9 +21,7 @@ describe OsuAuth::UserPolicy  do
       expect(subject).to permit(user, user)
     end
 
-    it 'denies access if user does not have view_users' do
-      expect(subject).not_to permit(user, user)
-    end
+    it { is_expected.not_to permit(user, user) }
   end
 
   permissions :create? do
@@ -33,9 +30,7 @@ describe OsuAuth::UserPolicy  do
       expect(subject).to permit(user, user)
     end
 
-    it 'denies access if user does not have add_user' do
-      expect(subject).not_to permit(user, user)
-    end
+    it { is_expected.not_to permit(user, user) }
   end
 
   permissions :new? do
@@ -44,9 +39,7 @@ describe OsuAuth::UserPolicy  do
       expect(subject).to permit(user, user)
     end
 
-    it 'denies access if user does not have add_user' do
-      expect(subject).not_to permit(user, user)
-    end
+    it { is_expected.not_to permit(user, user) }
   end
 
   permissions :update? do
@@ -55,9 +48,7 @@ describe OsuAuth::UserPolicy  do
       expect(subject).to permit(user, user)
     end
 
-    it 'denies access if user does not have edit_user' do
-      expect(subject).not_to permit(user, user)
-    end
+    it { is_expected.not_to permit(user, user) }
   end
 
   permissions :edit? do
@@ -66,9 +57,7 @@ describe OsuAuth::UserPolicy  do
       expect(subject).to permit(user, user)
     end
 
-    it 'denies access if user does not have edit_user' do
-      expect(subject).not_to permit(user, user)
-    end
+    it { is_expected.not_to permit(user, user) }
   end
 
   permissions :destroy? do
@@ -77,9 +66,7 @@ describe OsuAuth::UserPolicy  do
       expect(subject).to permit(user, user)
     end
 
-    it 'denies access if user does not have delete_user' do
-      expect(subject).not_to permit(user, user)
-    end
+    it { is_expected.not_to permit(user, user) }
   end
 
   permissions :masquerade? do
@@ -87,10 +74,7 @@ describe OsuAuth::UserPolicy  do
       expect(subject).not_to permit(user, user)
     end
 
-    it 'grants access if user is super admin' do
-      user.super_admin = true
-      expect(subject).to permit(user, user)
-    end
+    it { is_expected.not_to permit(user, user) }
   end
 
 end
