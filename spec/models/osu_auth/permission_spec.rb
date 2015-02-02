@@ -14,7 +14,7 @@ module OsuAuth
         #   {name: :perm1, description: 'permission one'},
         # ]
 
-        expect(OsuAuth::Permission.first.name).to eq(:edit_user)
+        expect(OsuAuth::Permission.first.name).to eq(:add_user)
         expect(OsuAuth::Permission.last.name).to eq(:perm1)
       end
     end
