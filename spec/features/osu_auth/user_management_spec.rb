@@ -18,4 +18,18 @@ feature 'User management' do
 
     expect(page).to have_text('User was successfully created.')
   end
+
+  scenario 'User can edit a user' do
+
+    user = create(:osu_auth_user)
+    set_permissions(user, %w(edit_user view_users))
+    login(user)
+    visit '/admin/users'
+    click_link 'Edit'
+
+    fill_in 'First Name', with: 'Bob'
+    click_button 'Update User'
+
+    expect(page).to have_text('User was successfully updated.')
+  end
 end
