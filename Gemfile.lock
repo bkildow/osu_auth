@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    osu_auth (0.0.1)
+    osu_auth (1.0.0)
       active_hash (~> 1.4)
       jquery-rails (~> 4.0)
       omniauth-shibboleth (~> 1.2)
@@ -94,7 +94,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    hashie (3.3.2)
+    hashie (3.4.0)
     hike (1.2.3)
     hitimes (1.2.2)
     i18n (0.7.0)
