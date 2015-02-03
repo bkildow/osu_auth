@@ -3,7 +3,7 @@ require 'rails_helper'
 module OsuAuth
   describe User do
 
-    let(:user) { create(:osu_auth_user) }
+    let(:user) { create(:osu_auth_user, name_n: 'buckeye.1') }
 
     # Create three roles
     let(:admin) { create(:osu_auth_role, name: 'admin') }
@@ -99,7 +99,6 @@ module OsuAuth
 
         auth_hash = {name_n: 'buckeye.1'}
         auth_user = User.omniauth(auth_hash)
-
         expect(auth_user.last_name).to eq(last_name)
       end
 
