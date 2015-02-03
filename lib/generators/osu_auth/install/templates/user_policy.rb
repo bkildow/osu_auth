@@ -32,4 +32,15 @@ class OsuAuth::UserPolicy < ApplicationPolicy
     @user.super_admin?
   end
 
+  class Scope < Scope
+
+    def resolve
+      if user.super_admin?
+        scope.all
+      else
+        scope.where(super_admin: false)
+      end
+    end
+  end
+
 end
