@@ -4,12 +4,12 @@ require 'support/spec_login_helper'
 feature 'User management' do
 
   before(:each) { @role = create(:osu_auth_role) }
+  before(:each) { @user = create(:osu_auth_user) }
 
   scenario 'User can create a new user' do
 
-    user = create(:osu_auth_user)
-    set_permissions(user, %w(add_user view_users))
-    login(user)
+    set_permissions(@user, %w(add_user view_users))
+    login(@user)
     visit '/admin/users/new'
 
     fill_in 'First Name', with: 'Bob'
@@ -24,9 +24,8 @@ feature 'User management' do
 
   scenario 'User can edit a user' do
 
-    user = create(:osu_auth_user)
-    set_permissions(user, %w(edit_user view_users))
-    login(user)
+    set_permissions(@user, %w(edit_user view_users))
+    login(@user)
     visit '/admin/users'
     click_link 'Edit'
 
@@ -35,5 +34,12 @@ feature 'User management' do
     click_button 'Update User'
 
     expect(page).to have_text('User was successfully updated.')
+  end
+
+  scenario 'User with no edit permissions cannot see edit link' do
+    set_permissions(@user, %w(view_users))
+    login(@user)
+    visit '/admin/users'
+    expect(page).to_not have_text('User was successfully updated.')
   end
 end
