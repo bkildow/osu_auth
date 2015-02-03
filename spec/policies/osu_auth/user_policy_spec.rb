@@ -77,4 +77,23 @@ describe OsuAuth::UserPolicy do
     it { is_expected.not_to permit(user, user) }
   end
 
+  describe '.scope' do
+    before(:each) do
+      create_list(:osu_auth_user, 2)
+      create(:osu_auth_user, super_admin: true)
+    end
+
+    it 'should allow super admins to see super admins' do
+      auth_user = create(:osu_auth_user, name_n: 'super.1', super_admin: true)
+      users = Pundit.policy_scope(auth_user, OsuAuth::User)
+      expect(users.count).to eq(4)
+    end
+
+    it 'should not allow regular users to see super admins' do
+      users = Pundit.policy_scope(user, OsuAuth::User)
+      expect(users.count).to eq(2)
+    end
+
+  end
+
 end
