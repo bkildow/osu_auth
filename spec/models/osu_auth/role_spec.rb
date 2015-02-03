@@ -8,12 +8,12 @@ module OsuAuth
     describe 'saving' do
       it 'should correctly save role name' do
         role = build(:osu_auth_role)
-        expect(role.name).to eq('Super Admin')
+        expect(role.name).to eq('Administrator')
       end
 
       it 'should create associations' do
         build(:osu_auth_role_membership)
-        expect(Role.first.name).to eq('Super Admin')
+        expect(Role.first.name).to eq('Administrator')
         expect(User.first.first_name).to eq('Brutus')
       end
     end

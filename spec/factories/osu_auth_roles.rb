@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :osu_auth_role, :class => 'OsuAuth::Role' do
-    name 'Super Admin'
+    name 'Administrator'
   end
 end
