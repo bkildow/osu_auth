@@ -40,6 +40,6 @@ feature 'User management' do
     set_permissions(@user, %w(view_users))
     login(@user)
     visit '/admin/users'
-    expect(page).to_not have_text('User was successfully updated.')
+    expect(page).to_not have_text('Edit')
   end
 end
