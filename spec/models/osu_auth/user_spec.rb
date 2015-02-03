@@ -55,6 +55,17 @@ module OsuAuth
           expect(user.can? 'view_user').to be_falsey
           expect(user.can? 'edit_user').to be_falsey
         end
+
+        it 'should bypass permissions if super_admin is true' do
+          admin_membership.destroy
+          editor_membership.destroy
+          viewer_membership.destroy
+
+          user.super_admin = true
+          expect(user.can? 'delete_user').to be_truthy
+          expect(user.can? 'view_user').to be_truthy
+          expect(user.can? 'edit_user').to be_truthy
+        end
       end
 
       describe '.permissions' do

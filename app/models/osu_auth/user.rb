@@ -15,7 +15,7 @@ module OsuAuth
 
     # Checks to see if the user has permission
     def can?(permission)
-      permissions.include? permission.to_s || super_admin?
+      permissions.include?(permission.to_s) || super_admin?
     end
 
     # Gets an array of all available permissions across roles assigned
