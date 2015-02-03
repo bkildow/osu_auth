@@ -30,8 +30,9 @@ module OsuAuth
 
     # POST /roles
     def create
+      authorize Role.new
       @role = RoleForm.new(role_params)
-      authorize @role
+
 
       if @role.save
         redirect_to roles_path, notice: 'Role was successfully created.'
