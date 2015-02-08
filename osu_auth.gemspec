@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'active_hash', '~> 1.4'
   s.add_dependency 'pundit', '~> 0.3'
   s.add_dependency 'omniauth-shibboleth', '~> 1.2'
+  s.add_dependency 'decorators', '~> 2.0'
 
   s.add_development_dependency 'sqlite3'
 end

@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    osu_auth (1.0.1)
+    osu_auth (1.1.0)
       active_hash (~> 1.4)
+      decorators (~> 2.0)
       jquery-rails (~> 4.0)
       omniauth-shibboleth (~> 1.2)
       pundit (~> 0.3)
@@ -66,6 +67,8 @@ GEM
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
+    decorators (2.0.0)
+      railties (>= 4.0.0, < 5.0.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
@@ -78,7 +81,7 @@ GEM
       railties (>= 3.0.0)
     ffi (1.9.6)
     formatador (0.2.5)
-    globalid (0.3.0)
+    globalid (0.3.2)
       activesupport (>= 4.1.0)
     guard (2.11.1)
       formatador (>= 0.2.4)

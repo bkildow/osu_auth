@@ -59,3 +59,22 @@ such as masquerading. There are some rake tasks to help you manage this flag:
 
 This feature lets you log in with another user. If you are a super admin (see above), just visit /admin/users and
 click the "login" link next to the user you wish to login as. When finished visit /admin/logout to destroy the session.
+
+
+## Extending models or controllers
+
+The ability to extend model or controllers exists by adding an appropriate decorator in your app.
+For example to extend the user model, you would add a decorator here `app/decorators/models/osu_auth/user_decorator.rb`
+and reopen the class using `class_eval`. For example, the user decorator would look something like this:
+
+```
+OsuAuth::User.class_eval do
+  attr_accessor :example
+  def hello_world
+    'Hello World'
+  end
+  def self.greetings
+    'Greetings!'
+  end
+end
+```

@@ -31,7 +31,7 @@ module OsuAuth
         [grant_admin_delete, grant_editor_edit, grant_viewer_view, grant_admin_view]
       end
 
-      describe '.can?' do
+      describe '#can?' do
         it 'should be true for permissions assigned' do
           expect(user.can? 'delete_user').to be_truthy
           expect(user.can? 'view_user').to be_truthy
@@ -68,7 +68,7 @@ module OsuAuth
         end
       end
 
-      describe '.permissions' do
+      describe '#permissions' do
         it 'should return an array of permissions assigned through roles' do
           expect(user.permissions).to eq(%w(delete_user view_user edit_user))
         end
@@ -115,6 +115,26 @@ module OsuAuth
       it 'should find a user by name_n' do
         auth_user = User.find_by_name_n(name_n: user.name_n)
         expect(auth_user.first_name).to eq('Brutus')
+      end
+    end
+
+    # Comes from the example decorator in:
+    # spec/dummy/app/decorators/models/osu_auth/user_decorator
+    describe 'decorators' do
+      describe '#hello_world' do
+        it 'should decorate the user model with a custom method' do
+          expect(user.hello_world).to eq('Hello World')
+        end
+      end
+
+      describe '.greetings' do
+        it 'should decorate the user model with a custom class method' do
+          expect(User.greetings).to eq('Greetings!')
+        end
+      end
+
+      it 'should respond to decorated attr_accessors' do
+        expect(user.respond_to?(:example)).to be_truthy
       end
     end
 
