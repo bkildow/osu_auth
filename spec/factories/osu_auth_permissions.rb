@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :osu_auth_permission, :class => 'OsuAuth::Permission' do
-    machine_name 'edit_user'
-    association :role, factory: :osu_auth_role
+    name 'edit_user'
+    description 'can edit user'
   end
 end
