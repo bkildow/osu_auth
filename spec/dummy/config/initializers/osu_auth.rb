@@ -5,3 +5,5 @@ OsuAuth::Permission.config do
   #   {name: :edit_resource, description: 'can edit resources'}
   ]
 end
+
+OsuAuth.application_controller_class = 'AdminController'

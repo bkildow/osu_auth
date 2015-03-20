@@ -6,4 +6,11 @@ require 'pundit'
 require 'decorators'
 
 module OsuAuth
+  mattr_accessor :application_controller_class
+
+  def self.application_controller_class
+    acc = @@application_controller_class || 'ApplicationController'
+    acc.constantize
+  end
+
 end

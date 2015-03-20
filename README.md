@@ -78,3 +78,10 @@ OsuAuth::User.class_eval do
   end
 end
 ```
+
+Also, if you would like to have the OsuAuth controllers inherit a different controller other than your
+application's ApplicationController, this can be set in the osu_auth initializer as well:
+
+```
+OsuAuth.application_controller_class = 'AdminController'
+```
