@@ -19,7 +19,7 @@ module OsuAuth
     end
 
     def login_path
-      Rails.env.production? ? '/auth/shibboleth' : '/auth/developer'
+      (Rails.env.production? || Rails.env.staging?) ? '/auth/shibboleth' : '/auth/developer'
     end
 
     def current_user
