@@ -64,7 +64,7 @@ module OsuAuth
     def masquerade
       session[:current_user] = @user.to_gid.to_s
       flash[:notice] = "You are now logged in as #{@user.display_name} (#{@user.name_n})"
-      redirect_to users_path
+      redirect_to root_url
     end
 
     private
