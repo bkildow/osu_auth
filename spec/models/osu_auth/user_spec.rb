@@ -120,14 +120,14 @@ module OsuAuth
 
     describe '#update_token' do
       it 'should update a token' do
-        token = user.update_token
+        user.update_token
         expect(user.auth_token.length).to eq(32)
       end
     end
 
     describe '#delete_token' do
       it 'should create a token' do
-        token = user.delete_token
+        user.delete_token
         expect(user.auth_token).to be_nil
       end
     end

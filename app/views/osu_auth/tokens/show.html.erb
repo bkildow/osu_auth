@@ -6,5 +6,7 @@
 <fieldset>
   <legend>Token</legend>
   <%= @user.auth_token %>
-  <%= button_to 'Generate', token_path(@user.id), method: :patch %>
 </fieldset>
+
+<%= button_to 'Generate', token_path(@user.id), method: :patch %>
+<%= button_to 'Delete', token_path(@user.id), method: :delete %>

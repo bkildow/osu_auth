@@ -13,7 +13,8 @@ module OsuAuth
     end
 
     def destroy
-      @user.delete_token
+      @user.delete_token ? msg = 'Token was successfully deleted' : msg = 'There was an error deleting the token'
+      redirect_to token_path(@user), notice: msg
     end
 
     private
