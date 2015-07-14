@@ -118,6 +118,20 @@ module OsuAuth
       end
     end
 
+    describe '#create_token' do
+      it 'should create a token' do
+        token = user.create_token
+        expect(user.auth_token.length).to eq(32)
+      end
+    end
+
+    describe '#delete_token' do
+      it 'should create a token' do
+        token = user.delete_token
+        expect(user.auth_token).to be_nil
+      end
+    end
+
     # Comes from the example decorator in:
     # spec/dummy/app/decorators/models/osu_auth/user_decorator
     describe 'decorators' do
