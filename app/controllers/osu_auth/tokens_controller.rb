@@ -7,8 +7,9 @@ module OsuAuth
     def show
     end
 
-    def create
-      @user.create_token
+    def update
+      @user.update_token ? msg = 'Token was successfully generated' : msg = 'There was an error generating the token'
+      redirect_to token_path(@user), notice: msg
     end
 
     def destroy

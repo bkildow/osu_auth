@@ -118,9 +118,9 @@ module OsuAuth
       end
     end
 
-    describe '#create_token' do
-      it 'should create a token' do
-        token = user.create_token
+    describe '#update_token' do
+      it 'should update a token' do
+        token = user.update_token
         expect(user.auth_token.length).to eq(32)
       end
     end

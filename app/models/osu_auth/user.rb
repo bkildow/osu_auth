@@ -18,7 +18,7 @@ module OsuAuth
       permissions.include?(permission.to_s) || super_admin?
     end
 
-    def create_token
+    def update_token
       token = SecureRandom.uuid.gsub(/\-/,'')
       update(auth_token: token)
     end

@@ -4,7 +4,7 @@ OsuAuth::Engine.routes.draw do
   end
 
   resources :roles
-  resources :tokens, only: [:show, :create, :destroy]
+  resources :tokens, only: [:show, :update, :destroy]
 
   get 'logout', to: 'sessions#destroy'
 end

@@ -2,3 +2,9 @@
   <li role="presentation" class="active"><%= link_to 'Edit User', edit_user_path(@user) %></li>
   <li role="presentation" class="active"><a href="#">API Token</a></li>
 </ul>
+
+<fieldset>
+  <legend>Token</legend>
+  <%= @user.auth_token %>
+  <%= button_to 'Generate', token_path(@user.id), method: :patch %>
+</fieldset>
