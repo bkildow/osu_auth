@@ -1,3 +1,10 @@
+<% if current_user.can?(:administer_tokens) %>
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#">Edit User</a></li>
+    <li role="presentation"><%= link_to 'API Token', token_path(@user) %></li>
+  </ul>
+<% end %>
+
 <h1>Editing user</h1>
 
 <%= render 'form' %>

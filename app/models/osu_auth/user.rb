@@ -18,6 +18,15 @@ module OsuAuth
       permissions.include?(permission.to_s) || super_admin?
     end
 
+    def create_token
+      token = SecureRandom.uuid.gsub(/\-/,'')
+      update(auth_token: token)
+    end
+
+    def delete_token
+      update(auth_token: nil)
+    end
+
     # Gets an array of all available permissions across roles assigned
     def permissions
       if @permissions.nil?
