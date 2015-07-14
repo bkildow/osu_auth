@@ -21,7 +21,7 @@ module OsuAuth
 
     def set_user
       @user = User.find(params[:id])
-      # authorize :token
+      authorize :token
     end
   end
 end
