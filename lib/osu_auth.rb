@@ -1,5 +1,6 @@
 require 'osu_auth/engine'
 require 'osu_auth/controller_helpers'
+require 'osu_auth/authenticate_token'
 require 'jquery-rails'
 require 'omniauth-shibboleth'
 require 'pundit'
