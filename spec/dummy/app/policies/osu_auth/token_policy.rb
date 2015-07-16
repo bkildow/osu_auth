@@ -1,4 +1,4 @@
-class TokenPolicy < ApplicationPolicy
+class OsuAuth::TokenPolicy < ApplicationPolicy
 
   def show?
     @user.can?(:administer_tokens)
