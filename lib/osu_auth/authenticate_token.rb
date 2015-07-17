@@ -20,8 +20,12 @@ module OsuAuth
     end
 
     def render_unauthorized
-      self.headers['WWW-Authenticate'] = 'Token realm="Application"'
-      render json: 'Bad credentials', status: 401
+      if defined?(RocketPants) == 'constant'
+        error! :unauthenticated
+      else
+        self.headers['WWW-Authenticate'] = 'Token realm="Application"'
+        render json: 'Bad credentials', status: 401
+      end
     end
 
   end
