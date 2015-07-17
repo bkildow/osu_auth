@@ -85,3 +85,24 @@ application's ApplicationController, this can be set in the osu_auth initializer
 ```
 OsuAuth.application_controller_class = 'AdminController'
 ```
+
+## API Authentication (Token Auth)
+
+You must either define the :administer_tokens permission or be a super admin to use this. Once this
+is defined, you should be able to see a tab on the user edit page called "API Token". On this
+Page you can generate a token for this user. Next you will want to add the ability to authenticate to a controller.
+To do this, add the following:
+
+```
+include OsuAuth::AuthenticateToken
+```
+
+This will now prevent access to the controller methods without the use of the token. You should be able to 
+pass a token with something like this:
+
+```
+$ curl -IH "Authorization: Token token=a47a8e54b11c4de5a4a351734c80a14a" http://localhost:3000/episodes
+```
+
+This feature was inspired by this blog post: 
+https://www.codeschool.com/blog/2014/02/03/token-based-authentication-rails/
