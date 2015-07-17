@@ -1,12 +1,14 @@
 <ul class="nav nav-tabs">
-  <li role="presentation"><%= link_to 'Edit User', edit_user_path(@user) %></li>
+  <li role="presentation" class="active"><%= link_to 'Edit User', edit_user_path(@user) %></li>
   <li role="presentation" class="active"><a href="#">API Token</a></li>
 </ul>
 
-<fieldset>
-  <legend>Token</legend>
+<h3>Token</h3>
+<div class="well">
   <%= @user.auth_token %>
-</fieldset>
+</div>
 
-<%= button_to 'Generate', token_path(@user.id), method: :patch %>
-<%= button_to 'Delete', token_path(@user.id), method: :delete %>
+<div class="actions">
+  <%= link_to 'Generate', token_path(@user.id), method: :patch, class: 'btn btn-primary' %>
+  <%= link_to 'Delete', token_path(@user.id), method: :delete, class: 'btn btn-danger' %>
+</div>
