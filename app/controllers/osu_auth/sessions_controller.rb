@@ -7,7 +7,7 @@ module OsuAuth
     def create
       user = User.omniauth(auth_hash)
       session[:current_user] = user.to_gid.to_s
-      redirect_to '/'
+      redirect_to session.delete(:osu_auth_redirect) || '/'
     end
 
     def destroy
