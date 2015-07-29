@@ -15,7 +15,7 @@ module OsuAuth
     private
 
     def authenticate_user!
-      session[:osu_auth_redirect] = request.path
+      session[:osu_auth_redirect] = request.fullpath
       redirect_to login_path unless current_user
     end
 
