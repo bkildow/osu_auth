@@ -18,7 +18,7 @@
     <tr>
       <th>Name</th>
       <th>Name.#</th>
-      <th>Email</th>
+      <th>Roles</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -28,7 +28,7 @@
       <tr>
         <td><%= user.display_name %></td>
         <td><%= user.name_n %></td>
-        <td><%= user.email %></td>
+        <td><%= user.roles.pluck(:name).join(', ') %></td>
         <td>
           <%= masquerade_user_link(user) %>
           <%= edit_user_link(user) %>

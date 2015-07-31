@@ -6,14 +6,14 @@ module OsuAuth
     field :description
 
     self.data = [
-        {name: :add_user, description: 'can add users'},
-        {name: :view_users, description: 'can view user lists'},
-        {name: :edit_user, description: 'can edit users'},
-        {name: :delete_user, description: 'can delete users'},
-        {name: :view_roles, description: 'can view role lists'},
-        {name: :add_role, description: 'can add roles'},
-        {name: :edit_role, description: 'can edit roles'},
-        {name: :delete_role, description: 'can delete roles'}
+        {name: :add_user, description: 'Can add users'},
+        {name: :view_users, description: 'Can view user lists'},
+        {name: :edit_user, description: 'Can edit users'},
+        {name: :delete_user, description: 'Can delete users'},
+        {name: :view_roles, description: 'Can view role lists'},
+        {name: :add_role, description: 'Can add roles'},
+        {name: :edit_role, description: 'Can edit roles'},
+        {name: :delete_role, description: 'Can delete roles'}
     ]
 
     def self.config

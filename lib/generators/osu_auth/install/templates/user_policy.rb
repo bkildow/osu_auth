@@ -36,9 +36,9 @@ class OsuAuth::UserPolicy < ApplicationPolicy
 
     def resolve
       if user.super_admin?
-        scope.all
+        scope.includes(:roles).all
       else
-        scope.where(super_admin: false)
+        scope.includes(:roles).where(super_admin: false)
       end
     end
   end
